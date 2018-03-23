@@ -23,6 +23,13 @@ namespace Blog.DAL.Tests
             var repository = new BlogRepository();
             // act
             var result = repository.GetAllPosts();
+            context.Posts.ToList().ForEach(x => context.Posts.Remove(x));
+            context.Posts.Add(new Post
+            {
+                Author = "test",
+                Content = "test, test, test..."
+            });
+            context.SaveChanges();
             // assert
             Assert.AreEqual(1, result.Count());
         }
